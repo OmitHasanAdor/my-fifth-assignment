@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- fonts  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="./assets/github-logo.png" type="image/x-icon">
+    <!-- icons  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- tailwind and daisyUI  -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- style  -->
+    <style>
+        * {
+
+            font-family: "Geist", sans-serif;
+
+        }
+    </style>
+
+    <title>GitHub Issues Tracker | Home </title>
+</head>
+<body>
+   <header>
+    <div class="navbar bg-base-100 shadow-sm">
+  <div class="flex-1">
+
+<a href="" class="flex justify-start items-center w-11/12 mx-auto gap-3">    <img src="./assets/github-logo.png" width="30px" alt="">
+<h3 class="text-xl font-bold">GitHub Issues Tracker</h3></a>
+
+
+  </div>
+  <div class="flex gap-2">
+   <section class="flex justify-center items-center  my-5">
+<div class="join space-x-1">
+  <div>
+    <label class="input rounded-sm validator join-item">
+    <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
+      <input class="rounded-lg" id="searchInput" type="text" placeholder="Search issues..." required />
+    </label>
+
+  </div>
+  <button id="searchBtn" class="btn btn-primary join-item rounded-sm"><i class="fa-solid fa-plus"></i> New Issue</button>
+</div>
+</section>
+  </div>
+</div>
+   </header>
+</body>
+</html>
