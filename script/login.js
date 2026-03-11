@@ -6,7 +6,7 @@ const inputPass=document.getElementById('inputPass')
 const passValue=inputPass.value 
 
 if (usernameValue=='admin' && passValue=='admin123') {
-    window.location.assign('/home.html')
+    window.location.assign('home.html')
 } else {
     alert('login failed')
 }
