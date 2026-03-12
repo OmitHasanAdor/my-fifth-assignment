@@ -1,0 +1,8 @@
+.open{
+    border-top: 2px solid #28a745;
+    border-radius: 5px;
+}
+.close{
+    border-top: 2px solid purple;
+     border-radius: 5px;
+}
