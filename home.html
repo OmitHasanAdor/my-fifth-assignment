@@ -31,7 +31,7 @@
 
 <body class="bg-[#F8FAFC] pb-6">
   <header class=" mb-15">
-    <div class="navbar bg-base-100 shadow-sm">
+    <div class="navbar bg-base-100 shadow-sm flex flex-wrap justify-between items-center">
       <div class="flex-1">
 
         <a href="" class="flex justify-start items-center w-11/12 mx-auto gap-3"> <img src="./assets/github-logo.png"
@@ -66,7 +66,7 @@
     <button onclick="showTab('closed', event)" class="tab-btn btn btn-outline btn-primary">Closed</button>
   </section>
 
-  <section class="issuesCont flex justify-between items-center my-5 bg-white w-11/12 mx-auto p-4 rounded-lg shadow-sm">
+  <section class="issuesCont flex flex-col sm:flex-row justify-between items-center my-5 bg-white w-11/12 mx-auto p-4 rounded-lg shadow-sm">
     <div class="issuesCount flex justify-between items-center gap-4">
       <div class=""><img src="./assets/Aperture.png" alt=""></div>
       <div class="">
@@ -74,7 +74,7 @@
         <p class="text-gray-600">Track and manage your project issues</p>
       </div>
     </div>
-    <div class="openCloseIcon flex justify-between items-center gap-4">
+    <div class="openCloseIcon flex mt-4 md:mt-0 justify-between items-center gap-4">
       <img src="./assets/Open-Status.png" alt=""><span class="">Open</span>
       <img src="./assets/Closed- Status .png" alt=""><span class="">Closed</span>
     </div>

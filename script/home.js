@@ -10,7 +10,11 @@ window.updateButtonStyles = (clickedBtn) => {
 }
 
 const loadModal = () => {
-  
+  fetch('https://phi-lab-server.vercel.app/api/v1/lab/issue/{id}')
+  .then(res => res.json())
+  .then(data => {
+
+  })
 }
 
 const loadissues = () => {
@@ -46,7 +50,7 @@ const displayIssues = (issues) => {
 
     let div = document.createElement('div')
     div.innerHTML = `
-<div class="issueCard h-full flex flex-col bg-white rounded-lg shadow-sm p-4 space-y-5">
+<div onclick="my_modal_5.showModal()" class="issueCard h-full flex flex-col bg-white rounded-lg shadow-sm p-4 space-y-5">
       <div class="priorityCont flex justify-between items-center mb-4">
         <div class="priority flex justify-start"><img src="./assets/${issue.status === 'open' ? 'Open-Status.png' : 'Closed- Status .png'}" class="w-5 h-5"></div>
         <div class="">
@@ -77,6 +81,9 @@ const displayIssues = (issues) => {
     issuesCont.appendChild(div)
   });
 }
+
+
+// modals 
 
 
 const getPriorityClass = (priority) => {
