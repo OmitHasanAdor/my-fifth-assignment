@@ -61,12 +61,19 @@
 
   <section
     class="buttonCont gap-4 flex justify-start items-center my-5 bg-white w-11/12 mx-auto p-4 rounded-lg shadow-sm">
-    <button onclick="showTab('all', event)" class="tab-btn btn btn-outline btn-primary">All</button>
+    <button onclick="showTab('all', event)" class="tab-btn btn btn-outline btn-primary bg-blue-700 text-white">All</button>
     <button onclick="showTab('open', event)" class="tab-btn btn btn-outline btn-primary">Open</button>
     <button onclick="showTab('closed', event)" class="tab-btn btn btn-outline btn-primary">Closed</button>
   </section>
 
-  <section class="issuesCont flex flex-col sm:flex-row justify-between items-center my-5 bg-white w-11/12 mx-auto p-4 rounded-lg shadow-sm">
+<!-- spinner  -->
+  <section id="spinner" class="flex justify-center items-center invisible">
+   <span class="loading loading-spinner text-neutral"></span>
+</section>
+
+<!-- issue cont  -->
+  <section
+    class="issuesCont flex flex-col sm:flex-row justify-between items-center my-5 bg-white w-11/12 mx-auto p-4 rounded-lg shadow-sm">
     <div class="issuesCount flex justify-between items-center gap-4">
       <div class=""><img src="./assets/Aperture.png" alt=""></div>
       <div class="">
@@ -84,7 +91,7 @@
     class="w-[100%] mx-auto bg-[#F8FAFC]  p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
   </section>
 
-    <!-- <div class="issueCard bg-white rounded-lg shadow-sm p-4 space-y-5">
+  <!-- <div class="issueCard bg-white rounded-lg shadow-sm p-4 space-y-5">
       <div class="priorityCont flex justify-between items-center mb-4">
         <div class="priority flex justify-start"><img src="./assets/Open-Status.png" alt=""><img
             src="./assets/Closed- Status .png" alt=""></div>
@@ -109,6 +116,22 @@
         <p class="text-gray-500">1/15/2024</p>
       </div>
     </div> -->
+  <!-- Open the modal using ID.showModal() method -->
+  <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
+  <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+    <div class="modal-box">
+      <div id="modalCont" class="space-y-5 p-5 border border-blue-50 rounded-md">
+
+      </div>
+      <div class="modal-action">
+        <form method="dialog">
+          <!-- if there is a button in form, it will close the modal -->
+          <button class="btn btn-primary">Close</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+
 
 
   <script src="./script/home.js"></script>

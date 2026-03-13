@@ -2,22 +2,63 @@ let allIssues = [];
 let openIssues = [];
 let closedIssues = [];
 
-window.updateButtonStyles = (clickedBtn) => {
-    const buttons = document.querySelectorAll('.tab-btn');
-    buttons.forEach(btn => btn.classList.remove('active-color'));
-    
-    clickedBtn.classList.add('active-color');
+const manageSpinner=(status)=>{
+    if (status==true) {
+        document.getElementById('spinner').classList.remove('invisible')
+        document.getElementById('issuesCont').classList.add('hidden')
+    }else{
+        document.getElementById('issuesCont').classList.remove('hidden')
+        document.getElementById('spinner').classList.add('invisible')
+
+    }
 }
 
-const loadModal = () => {
-  fetch('https://phi-lab-server.vercel.app/api/v1/lab/issue/{id}')
+
+const loadModal = (id) => {
+  const url=`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`
+  fetch(url)
   .then(res => res.json())
   .then(data => {
+    displayModal(data.data)
+    console.log(data.data)
 
   })
 }
 
+const displayModal = (issue) => {
+  const modalCont = document.getElementById('modalCont');
+  modalCont.innerHTML = `
+
+   <div class="">
+     <h3 class="font-bold text-xl mb-5">${issue.title}</h3>
+  <button class="btn btn-success">${issue.status}</button> <span class=" text-gray-500">${issue.status}ed by ${issue.author}</span> <span class=" text-gray-500">${issue.createdAt ? issue.createdAt.split('T')[0] : ''}</span>
+   </div>
+    ${issue.labels.map(label => `
+            <span class="inline-flex items-center gap-1 bg-red-50 text-red-600 text-[11px] font-medium px-2 py-0.5 rounded-full border border-red-100 whitespace-nowrap">
+                <span class="text-[8px]"><i class="fa-solid fa-earth-africa"></i></span>${label}
+            </span>
+        `).join('')}
+
+        <p class=""> ${issue.description}</p>
+        <div class="assign flex justify-between items-center bg-base-200 p-4 rounded-md">
+          <div class="assignAuthor">
+            <p class=" text-gray-500">Assignee:</p>
+            <h3 class=" font-bold">${issue.author}</h3>
+          </div>
+          <div class="assignpriority">
+            <p class=" text-gray-500">Priority:</p>
+            <span class="px-3 py-1 rounded text-xs font-bold uppercase ${getPriorityClass(issue.priority)}">
+                    ${issue.priority}
+                </span>
+          </div>
+        </div>
+  
+  `;
+document.getElementById('my_modal_5').showModal()
+}
+
 const loadissues = () => {
+  manageSpinner(true)
   fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues')
     .then(res => res.json())
     .then(data => {
@@ -26,13 +67,14 @@ const loadissues = () => {
       closedIssues = allIssues.filter(issue => issue.status.toLowerCase() === 'closed');
       displayIssues(allIssues)
       // count update 
-      updateCounts();
+      // updateCounts();
 
     })
 }
 
 // Button-er functionality
 const showTab = (type, event) => {
+   manageSpinner(true)
   if (type === 'all') displayIssues(allIssues);
   else if (type === 'open') displayIssues(openIssues);
   else if (type === 'closed') displayIssues(closedIssues);
@@ -43,14 +85,16 @@ const showTab = (type, event) => {
 
 
 const displayIssues = (issues) => {
+     manageSpinner(true)
+
   const issuesCont = document.getElementById('issuesCont')
   issuesCont.innerHTML = ''
-  document.getElementById('issueCountText').innerText = `${issues.length} Issues`;
+  document.getElementById('issueCountText').innerText = `${issues.length}`;
   issues.forEach(issue => {
 
     let div = document.createElement('div')
     div.innerHTML = `
-<div onclick="my_modal_5.showModal()" class="issueCard h-full flex flex-col bg-white rounded-lg shadow-sm p-4 space-y-5">
+<div onclick="loadModal(${issue.id})" class="issueCard h-full flex flex-col bg-white rounded-lg shadow-sm p-4 space-y-5 border-t-4 ${issue.status === 'open' ? 'border-green-500' : 'border-purple-500'}">
       <div class="priorityCont flex justify-between items-center mb-4">
         <div class="priority flex justify-start"><img src="./assets/${issue.status === 'open' ? 'Open-Status.png' : 'Closed- Status .png'}" class="w-5 h-5"></div>
         <div class="">
@@ -80,6 +124,7 @@ const displayIssues = (issues) => {
     `
     issuesCont.appendChild(div)
   });
+  manageSpinner(false)
 }
 
 
@@ -102,3 +147,18 @@ const updateButtonStyles = (activeBtn) => {
 }
 
 loadissues()
+
+document.getElementById('searchBtn').addEventListener('click',()=>{
+    // removeActiveClass()
+    const input=document.getElementById('searchInput')
+    const searchValue=input.value.trim().toLowerCase()
+
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`)
+    .then(res=>res.json())
+    .then(json=>{
+        const allWords=json.data
+        const filterWords=allWords.filter(match=>match.title.toLowerCase().includes(searchValue))
+        // console.log(filterWords)
+        displayIssues(filterWords)
+    })
+})
