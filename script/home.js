@@ -85,7 +85,7 @@ const showTab = (type, event) => {
 
 
 const displayIssues = (issues) => {
-     manageSpinner(true)
+    //  manageSpinner(true)
 
   const issuesCont = document.getElementById('issuesCont')
   issuesCont.innerHTML = ''
