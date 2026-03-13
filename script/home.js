@@ -149,6 +149,7 @@ const updateButtonStyles = (activeBtn) => {
 loadissues()
 
 document.getElementById('searchBtn').addEventListener('click',()=>{
+   manageSpinner(true)
     // removeActiveClass()
     const input=document.getElementById('searchInput')
     const searchValue=input.value.trim().toLowerCase()
@@ -160,5 +161,6 @@ document.getElementById('searchBtn').addEventListener('click',()=>{
         const filterWords=allWords.filter(match=>match.title.toLowerCase().includes(searchValue))
         // console.log(filterWords)
         displayIssues(filterWords)
+         manageSpinner(false)
     })
 })
